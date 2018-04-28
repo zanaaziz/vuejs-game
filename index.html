@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script src="vue.js"></script>
+        <link rel="stylesheet" href="css/foundation.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <title>Mini Vue Game</title>
+    </head>
+
+    <body>
+        <div id="game">
+            <section class="row">
+                <div class="small-6 columns">
+                    <h1 class="text-center">YOU</h1>
+                    <div class="healthbar">
+                        <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: playerHealth + '%'}" v-if="gameActive">
+                            <span style="line-height: 40px">{{ playerHealth }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-6 columns">
+                    <h1 class="text-center">ENEMY</h1>
+                    <div class="healthbar">
+                        <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: enemyHealth + '%'}" v-if="gameActive">
+                            <span style="line-height: 40px">{{ enemyHealth }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="row controls" v-if="!gameActive">
+                <div class="small-12 columns">
+                    <button id="start-game" @click="startGame()">START NEW GAME</button>
+                </div>
+            </section>
+            <section class="row controls" v-else>
+                <div class="small-12 columns">
+                    <button id="attack" @click="attack()">ATTACK</button>
+                    <button id="special-attack" @click="specialAttack()">SPECIAL ATTACK</button>
+                    <button id="heal" @click="heal()">HEAL</button>
+                    <button id="give-up" @click="gameActive = false">FORFEIT</button>
+                </div>
+            </section>
+            <section class="row log" v-if="gameActive">
+                <div class="small-12 columns">
+                    <ul>
+                        <li v-for="log in logs">{{ log }}</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        
+        <script src="script.js"></script>
+    </body>
+</html>
